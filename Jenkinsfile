@@ -1,12 +1,27 @@
-FROM ubuntu:latest
-
-RUN apt-get update \
-    && apt-get install -y apache2 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY index.html /var/www/html/
-
-EXPOSE 80
-
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+pipeline {
+    agent {
+        label 'ubuntu'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'sudo apt-get update'
+                sh 'sudo apt-get install -y apache2'
+                sh 'sudo systemctl start apache2'
+                sh 'sudo systemctl enable apache2'
+                sh 'sudo chmod -R 777 /var/www/html'
+                sh 'echo "<html><body><h1>Welcome to my custom web page!</h1></body></html>" > /var/www/html/index.html'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'curl http://localhost'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // your deployment steps here
+            }
+        }
+    }
+}
