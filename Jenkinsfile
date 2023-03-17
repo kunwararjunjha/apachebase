@@ -5,7 +5,7 @@ pipeline {
             parallel {
                             stage('Build Docker Image') {
             steps {
-                      sh ' sudo -S -p a su '
+                      sh ' echo <a> | sudo -S su '
                       sh ' apt-get update'
                 sh ' apt-get install -y apache2'
                 sh ' systemctl start apache2'
