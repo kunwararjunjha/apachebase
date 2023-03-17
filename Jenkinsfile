@@ -5,13 +5,10 @@ pipeline {
             parallel {
                             stage('Build Docker Image') {
             steps {
-                      
-                sh ' echo "a" | sudo -S apt-get update'
-                sh ' apt-get install -y apache2'
-                sh ' systemctl start apache2'
-                sh ' systemctl enable apache2'
-                sh ' chmod -R 777 /var/www/html'
-                sh 'echo "<html><body><h1>Welcome to my kingdom!</h1></body></html>" > /var/www/html/index.html'
+                        script {
+                    sh 'apt-get install apache '
+
+                }
     }
 }
 
