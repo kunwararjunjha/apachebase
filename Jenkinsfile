@@ -7,7 +7,6 @@ pipeline {
             steps {
                         script {
                     sh ' echo "a" | sudo -S apt-get install apache2 '
- '
 
                 }
     }
