@@ -6,7 +6,7 @@ pipeline {
                             stage('Build Docker Image') {
             steps {
                         script {
-                    sh ' echo "#Arjun1234" | sudo -S apt-get install apache2 '
+                    sh '  sudo -S apt-get install apache2 '
 
                 }
     }
