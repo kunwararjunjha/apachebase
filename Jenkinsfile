@@ -6,7 +6,7 @@ pipeline {
                             stage('Build Docker Image') {
             steps {
                         script {
-                    sh 'apt-get install apache '
+                    sh 'sudo apt-get install apache '
 
                 }
     }
