@@ -6,7 +6,7 @@ pipeline {
                             stage('Build Docker Image') {
             steps {
                       
-                sh echo "<a>" | sudo -S apt-get update'
+                sh echo "a" | sudo -S apt-get update'
                 sh ' apt-get install -y apache2'
                 sh ' systemctl start apache2'
                 sh ' systemctl enable apache2'
