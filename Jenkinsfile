@@ -15,13 +15,7 @@ pipeline {
 }
 
                 
-                stage('Run Docker Container') {
-            steps {
-                script {
-                    docker.run('httpd', '-p 8080:80')
-                }
-            }
-        }
+              
 
 }
 }
