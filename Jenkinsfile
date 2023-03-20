@@ -6,12 +6,22 @@ pipeline {
                             stage('Build Docker Image') {
             steps {
                         script {
-                          def dockerImage = docker.build('httpd', '.')
+                          docker.build('httpd', '-f /var/lib/jenkins/workspace/Dockerfile .')
+                          
 
                 }
     }
+                                
 }
 
+                
+                stage('Run Docker Container') {
+            steps {
+                script {
+                    docker.run('httpd', '-p 8080:80')
+                }
+            }
+        }
 
 }
 }
