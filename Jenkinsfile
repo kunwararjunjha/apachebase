@@ -6,8 +6,12 @@ pipeline {
                             stage('Build Docker Image') {
             steps {
                         script {
-                    sh '  sudo -S apt-get install apache2 '
-
+                    sh '  RUN apt update  '
+                    sh '  RUN apt install –y apache2   '
+                    sh '  RUN apt install –y apache2-utils   '
+                    sh ' RUN apt clean   '
+                    sh '  EXPOSE 80  '
+                    sh ' CMD [“apache2ctl”, “-D”, “FOREGROUND”] '
                 }
     }
 }
