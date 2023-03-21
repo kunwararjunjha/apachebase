@@ -14,7 +14,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.run("-d --name my-apache-container -p 80:80 ${DOCKER_TAG}")
+                 def dockerContainer = dockerImage.run("-d --name my-apache-container -p 80:80 ${DOCKER_TAG}")
                 }
             }
         }
