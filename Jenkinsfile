@@ -14,9 +14,15 @@ pipeline {
                 }
             }
         }
-    
-   
-    
+        
+        stage('Deploy Container') {
+            steps {
+                ansiblePlaybook(
+                    playbook: '/var/lib/jenkins/workspace/Ansible_httpd/apache.yml',
+                    extraVars: [build_number: params.build_number]
+                )
+            }
+        }
     }
 }
 
