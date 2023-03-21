@@ -19,7 +19,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.run(
+                    dockerImage.run(
                         "${IMAGE_NAME}",
                         "--name ${CONTAINER_NAME} -p 80:80 -d"
                     )
