@@ -10,7 +10,12 @@ pipeline {
                     def imageName = "my-apache-container:${params.build_number}"
                     def containerName = "my-apache-container-${params.build_number}"
                     docker.build(imageName, '-f /var/lib/jenkins/workspace/Dockerfile .')
-                    docker.run("-d --name ${containerName} -p 80:80 ${imageName}")
+                    docker.run(
+                        '-d',
+                        '--name', containerName,
+                        '-p', '80:80',
+                        imageName
+                    )
                 }
             }
         }
