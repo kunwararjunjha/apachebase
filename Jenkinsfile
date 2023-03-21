@@ -1,24 +1,18 @@
 pipeline {
     agent any
-    environment {
-        BUILD_NUMBER = sh(script: 'echo ${BUILD_NUMBER}', returnStdout: true).trim()
-        IMAGE_NAME = "my-apache-container:${BUILD_NUMBER}"
+    parameters {
+        string(name: 'build_number', defaultValue: '', description: 'Specify build number')
     }
     stages {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("-t ${IMAGE_NAME} -f /var/lib/jenkins/workspace/Dockerfile .")
-                }
-            }
-        }
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    docker.run("-d --name my-apache-container-${BUILD_NUMBER} -p 80:80 ${IMAGE_NAME}")
+                    def imageTag = "my-apache-container:${params.build_number}"
+                    def containerName = "my-apache-container-${params.build_number}"
+                    docker.build(imageTag, '-f /var/lib/jenkins/workspace/Dockerfile .')
+                    docker.run("-d --name ${containerName} -p 80:80 ${imageTag}")
                 }
             }
         }
     }
 }
-
