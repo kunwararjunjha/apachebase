@@ -14,6 +14,20 @@ pipeline {
                 }
             }
         }
+    
+    stage('Build Docker Image') {
+    steps {
+        ansiblePlaybook(
+            playbook: '/var/lib/jenkins/workspace/Ansible_httpd/apache.yml',
+            inventory: 'localhost,',
+            extraVars: [
+                build_number: "${params.build_number}",
+                commit_id: sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+            ]
+        )
+    }
+}
+    
     }
 }
 
