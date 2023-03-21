@@ -7,7 +7,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def imageTag = ":my-apache-container-${params.build_number}"
+                    def imageTag = ":httpd-${params.build_number}"
                     def containerName = "my-apache-container-${params.build_number}"
                     docker.build(imageTag, '-f /var/lib/jenkins/workspace/Dockerfile .')
                     docker.run("-d --name ${containerName} -p 80:80 ${imageTag}")
