@@ -14,7 +14,7 @@ pipeline {
                         '-d',
                         '--name', containerName,
                         '-p', '80:80',
-                        imageName.toString()  // convert GString to string
+                        imageName.toString()  // convert GString to plain string
                     )
                 }
             }
