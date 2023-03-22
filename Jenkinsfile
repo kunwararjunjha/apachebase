@@ -15,14 +15,22 @@ pipeline {
             }
         }
         
-        stage('Build and push image') {
-            steps {
-                sh 'docker build -t my-apache-container:${params.build_number}-${commitId} .'
-                sh 'docker tag my-apache-container:${params.build_number}-${commitId} localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
-                sh 'docker login localhost:8083/repository/apache_image -u admin -p #Arjun1234'
-                sh 'docker push localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
-            }
-        }
+         stage('Tag image') {
+      steps {
+        // Tag the image with the Nexus repository URL
+        sh 'docker tag my-apache-container:${params.build_number}-${commitId} localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
+      }
+    }
+
+    stage('Push image') {
+      steps {
+        // Log in to the Nexus registry
+        sh 'docker login localhost:8083/repository/apache_image'
+
+        // Push the tagged image to the Nexus registry
+        sh 'docker push localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
+      }
+    }
     }
 }
 
