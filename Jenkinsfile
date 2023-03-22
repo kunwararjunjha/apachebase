@@ -15,12 +15,12 @@ pipeline {
             }
         }
         
-        stage('Deploy Container') {
+        stage('Build and push image') {
             steps {
-                ansiblePlaybook(
-                    playbook: '/var/lib/jenkins/workspace/Ansible_httpd/apache.yml',
-                    extraVars: [build_number: params.build_number]
-                )
+                sh 'docker build -t my-apache-container:${params.build_number}-${commitId} .'
+                sh 'docker tag my-apache-container:${params.build_number}-${commitId} localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
+                sh 'docker login localhost:8083/repository/apache_image -u admin -p #Arjun1234'
+                sh 'docker push localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
             }
         }
     }
