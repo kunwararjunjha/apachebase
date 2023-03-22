@@ -36,7 +36,7 @@ pipeline {
           
         sh 'docker pull localhost:8083/repository/apache_image/my-apache-container:80-9745949'  
           
-        sh 'docker run -d --name apache -p 80:80 localhost:8083/repository/apache_image/my-apache-container:80-9745949'
+        sh 'docker run -d --name apachee -p 80:80 localhost:8083/repository/apache_image/my-apache-container:80-9745949'
 
       }
     }
