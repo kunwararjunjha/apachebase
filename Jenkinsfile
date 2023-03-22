@@ -34,9 +34,9 @@ pipeline {
           // Log in to the Nexus registry
         sh 'docker login --username "admin" --password "#Arjun1234" localhost:8083/repository/apache_image'
           
-        sh 'docker pull localhost:8083/repository/apache_image/my-apache-image:latest'  
+        sh 'docker pull localhost:8083/repository/apache_image/my-apache-container:80-9745949'  
           
-        sh 'docker run -d --name apache -p 80:80 localhost:8083/repository/apache_image/my-apache-image:latest'
+        sh 'docker run -d --name apache -p 80:80 localhost:8083/repository/apache_image/my-apache-container:80-9745949'
 
       }
     }
