@@ -29,6 +29,9 @@ pipeline {
 
         // Push the tagged image to the Nexus registry
         sh 'docker push localhost:8083/repository/apache_image/my-apache-container:80-9745949'
+          
+          // Create container from the Apache image
+                sh 'docker run -d --name my-apache-container -p 80:80 my-apache-image:80-9745949'
       }
     }
     }
