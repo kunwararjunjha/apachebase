@@ -30,8 +30,8 @@ pipeline {
 
     stage('Push image') {
       steps {
-          script {
-          def commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+           script {
+                    def commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
                     def imageName = "my-apache-container:${params.build_number}-${commitId}"
                     def containerName = "my-apache-container-${params.build_number}-${commitId}"
         // Log in to the Nexus registry
