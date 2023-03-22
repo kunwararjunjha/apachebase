@@ -32,6 +32,14 @@ pipeline {
           
           // Create container from the Apache image
                 sh 'docker run -d --name my-apache-container -p 80:80 my-apache-image:80-9745949'
+          
+          // Log in to the Nexus registry
+        sh 'docker login --username "admin" --password "#Arjun1234" localhost:8083/repository/apache_image'
+          
+        sh 'docker pull localhost:8083/repository/apache_image/my-apache-image:80-9745949'  
+          
+        sh 'docker run -d --name apache -p 80:80 localhost:8083/repository/apache_image/my-apache-image:80-9745949'
+
       }
     }
     }
