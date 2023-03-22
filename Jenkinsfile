@@ -25,7 +25,7 @@ pipeline {
     stage('Push image') {
       steps {
         // Log in to the Nexus registry
-        sh 'docker login --username admin --password #Arjun1234 localhost:8083/repository/apache_image'
+        sh 'docker login --username "admin" --password "#Arjun1234" localhost:8083/repository/apache_image'
 
         // Push the tagged image to the Nexus registry
         sh 'docker push localhost:8083/repository/apache_image/my-apache-container:80-9745949'
