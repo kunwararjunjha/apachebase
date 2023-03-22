@@ -18,7 +18,7 @@ pipeline {
          stage('Tag image') {
       steps {
         // Tag the image with the Nexus repository URL
-        sh 'docker tag my-apache-container:${params.build_number}-${commitId} localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
+        sh 'docker tag my-apache-container:80-9745949 localhost:8083/repository/apache_image/my-apache-container:80-9745949'
       }
     }
 
@@ -28,7 +28,7 @@ pipeline {
         sh 'docker login localhost:8083/repository/apache_image'
 
         // Push the tagged image to the Nexus registry
-        sh 'docker push localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
+        sh 'docker push localhost:8083/repository/apache_image/my-apache-container:80-9745949'
       }
     }
     }
