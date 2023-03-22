@@ -27,18 +27,7 @@ pipeline {
                       
                               sh 'docker login --username "admin" --password "#Arjun1234" localhost:8083/repository/apache_image'
 
-      }
-             }            
-    }
-
-    stage('Push image') {
-       steps {
-           script {
-                    def commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-                    def imageName = "my-apache-container:${params.build_number}-${commitId}"
-                    def containerName = "my-apache-container-${params.build_number}-${commitId}"
-        // Log in to the Nexus registry
-
+    
         // Push the tagged image to the Nexus registry
         sh 'docker push localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
           
