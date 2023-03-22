@@ -17,8 +17,11 @@ pipeline {
         
          stage('Tag image') {
       steps {
+          def commitId = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                    def imageName = "my-apache-container:${params.build_number}-${commitId}"
+                    def containerName = "my-apache-container-${params.build_number}-${commitId}"
         // Tag the image with the Nexus repository URL
-        sh 'docker tag my-apache-container:80-9745949 localhost:8083/repository/apache_image/my-apache-container:80-9745949'
+        sh 'docker tag my-apache-container:${params.build_number}-${commitId} localhost:8083/repository/apache_image/my-apache-container:${params.build_number}-${commitId}'
       }
     }
 
