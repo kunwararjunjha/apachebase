@@ -18,7 +18,7 @@ pipeline {
          stage('Tag image') {
            
              steps {
-                  sh 'ansible-playbook -vvv /var/lib/jenkins/workspace/Ansible_httpd/apache.yml --extra-vars "ansible_become_password=a"'
+                  sh 'ansible-playbook -vvv /var/lib/jenkins/workspace/Ansible_httpd/apache.yml set +e --extra-vars "ansible_become_password=a"'
                   
         
       
