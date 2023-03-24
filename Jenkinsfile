@@ -18,24 +18,9 @@ pipeline {
          stage('Tag image') {
            
              steps {
+                  sh '''  ansible-playbook  /var/lib/jenkins/workspace/Ansible_httpd/apache.yml  '''
                   
-        // Tag the image with the Nexus repository URL
-        sh 'docker tag my-apache-container:80-9745949 localhost:8083/repository/apache_image/my-apache-container:80-9745949'
-                      
-                              sh 'docker login --username "admin" --password "#Arjun1234" localhost:8083/repository/apache_image'
-
-    
-        // Push the tagged image to the Nexus registry
-        sh 'docker push localhost:8083/repository/apache_image/my-apache-container:80-9745949'
-          
-                   
-          // Log in to the Nexus registry
-        sh 'docker login --username "admin" --password "#Arjun1234" localhost:8083/repository/apache_image'
-          
-        sh 'docker pull localhost:8083/repository/apache_image/my-apache-container:80-9745949'  
-          
-        sh 'docker run -d --name apachee -p 80:80 localhost:8083/repository/apache_image/my-apache-container:80-9745949'
-
+        
       
       }
     }
